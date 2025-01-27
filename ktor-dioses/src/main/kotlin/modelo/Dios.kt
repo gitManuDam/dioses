@@ -9,5 +9,5 @@ data class Dios(
     val virtud: Int,        // Nivel de virtud del dios
     val maldad: Int,        // Nivel de maldad del dios
     val audacia: Int,       // Nivel de audacia del dios
-    val foto: Int           // Identificador o referencia a la foto del dios
+    val foto: String           // Identificador o referencia a la foto del dios
 )
