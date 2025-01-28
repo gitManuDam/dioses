@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">App_dioses</string>
+    <string name="usuario">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="iniciarSesion">Iniciar Sesion</string>
+    <string name="salir">Salir</string>
 </resources>
