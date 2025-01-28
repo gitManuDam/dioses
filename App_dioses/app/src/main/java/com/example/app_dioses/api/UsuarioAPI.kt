@@ -9,25 +9,24 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 import com.example.app_dioses.modelo.*
-import java.util.Objects
 
 interface UsuarioAPI {
 
     // Rutas para Humanos
 
-    @POST("registrarHumano")
+    @POST("humanos/registrarHumano")
     suspend fun registrarHumano(@Body humano: Humano): Response<Boolean>
 
-    @PUT("modificarPerfilHumano")
+    @PUT("humanos/modificarPerfilHumano")
     suspend fun modificarPerfilHumano(@Body humano: Humano): Response<Boolean>
 
-    @POST("loginHumano")
-    suspend fun loginHumano(@Body datosLogIn: UsuarioLogIn): Response<Any?>
+    @POST("humanos/login")
+    suspend fun loginHumano(@Body datosLogIn: UsuarioLogIn): Response<Humano?>
 
-    @PUT("modificarDestinoHumano/{id}")
+    @PUT("humanos/modificarDestinoHumano/{id}")
     suspend fun modificarDestinoHumano(@Path("id") id: Int, @Body destino: Int): Response<Boolean>
 
-    @DELETE("eliminarHumano/{id}")
+    @DELETE("humanos/eliminarHumano/{id}")
     suspend fun eliminarHumano(@Path("id") id: Int): Response<Boolean>
 
     @GET("humanos/{id}")
@@ -36,25 +35,25 @@ interface UsuarioAPI {
     @GET("humanos")
     suspend fun obtenerTodosLosHumanos(): Response<MutableList<Humano>>
 
-    @GET("filtrarHumanosPorNombre/{nombre}")
+    @GET("humanos/filtrarHumanosPorNombre/{nombre}")
     suspend fun filtrarHumanosPorNombre(@Path("nombre") nombre: String): Response<MutableList<Humano>>
 
 
     // Rutas para Dioses
 
-    @POST("registrarDios")
+    @POST("dioses/registrarDios")
     suspend fun registrarDios(@Body dios: Dios): Response<Boolean>
 
-    @POST("loginDios")
-    suspend fun loginDios(@Body datosLogIn: UsuarioLogIn): Response<Any?>
+    @POST("dioses/login")
+    suspend fun loginDios(@Body datosLogIn: UsuarioLogIn): Response<Dios?>
 
-    @PUT("modificarPerfilDios")
+    @PUT("dioses/modificarPerfilDios")
     suspend fun modificarPerfilDios(@Body dios: Dios): Response<Boolean>
 
-    @PUT("activarCuentaDios/{id}")
+    @PUT("dioses/activarCuentaDios/{id}")
     suspend fun activarCuentaDios(@Path("id") id: Int): Response<Boolean>
 
-    @DELETE("eliminarDios/{id}")
+    @DELETE("dioses/eliminarDios/{id}")
     suspend fun eliminarDios(@Path("id") id: Int): Response<Boolean>
 
     @GET("dioses/{id}")
@@ -63,6 +62,6 @@ interface UsuarioAPI {
     @GET("dioses")
     suspend fun obtenerTodosLosDioses(): Response<MutableList<Dios>>
 
-    @GET("filtrarDiosesPorNombre/{nombre}")
+    @GET("dioses/filtrarDiosesPorNombre/{nombre}")
     suspend fun filtrarDiosesPorNombre(@Path("nombre") nombre: String): Response<MutableList<Dios>>
 }

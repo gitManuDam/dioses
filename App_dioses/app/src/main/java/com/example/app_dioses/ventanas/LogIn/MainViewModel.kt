@@ -1,15 +1,15 @@
 package com.example.app_dioses.ventanas.LogIn
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.app_dioses.api.UsuarioNetwork
-import com.example.app_dioses.modelo.Dios
 import com.example.app_dioses.modelo.UsuarioLogIn
 import kotlinx.coroutines.launch
 import retrofit2.Response
-import java.util.Objects
+import com.example.app_dioses.modelo.*
 
 class MainViewModel: ViewModel() {
     private val _errorCode = MutableLiveData<Int?>()
@@ -19,42 +19,94 @@ class MainViewModel: ViewModel() {
         _errorCode.value = null
     }
 
-    private val _usuarioLogeado = MutableLiveData<Any?>()
-    val usuarioLogeado: LiveData<Any?> get() = _usuarioLogeado
+    private val _humanoLogeado = MutableLiveData<Humano?>()
+    val humanoLogeado: LiveData<Humano?> get() = _humanoLogeado
 
-//    fun iniciarSesionVM(id: Int){
-//        viewModelScope.launch {
-//            val response: Response<Any?> = UsuarioNetwork.retrofit.obtenerUsuarioPorId(id)
-//            _usuarioLogeado.value = response.body()
-//        }
-//    }
+    private val _diosLogeado = MutableLiveData<Dios?>()
+    val diosLogeado: LiveData<Dios?> get() = _diosLogeado
+
+    private fun loginDiosID(id: Int) {
+        viewModelScope.launch {
+            val response: Response<Dios?> = UsuarioNetwork.retrofit.obtenerDiosPorId(id)
+            if (response.isSuccessful) {
+                _diosLogeado.value = response.body()
+            } else {
+                _errorCode.value = response.code()
+            }
+        }
+    }
+    private fun loginHumanoID(id: Int) {
+        viewModelScope.launch {
+            val response: Response<Humano?> = UsuarioNetwork.retrofit.obtenerHumanoPorId(id)
+            if (response.isSuccessful) {
+                _humanoLogeado.value = response.body()
+            } else {
+                _errorCode.value = response.code()
+
+            }
+        }
+    }
+
+    fun reiniciarSesionVM(usuario:Any){
+
+        when(usuario){
+            is Dios -> loginDiosID(usuario.id)
+            is Humano -> loginHumanoID(usuario.id)
+        }
+
+    }
+
     fun cerrarSesionVM(){
-        _usuarioLogeado.value = null
+        _humanoLogeado.value = null
+        _diosLogeado.value = null
     }
 
 
 
 
-
-
     fun loginVM(datosLogIn: UsuarioLogIn) {
-        viewModelScope.launch {
-            //comprobar si el nombre coincide con un correo si es un nombre llamar a las funciones de dios
-            //si es un correo llamar a las funciones de humano
-            val emailRegex = Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\$")
+        Log.e("Manuel", "loginVM:")
+            // Regex para verificar si es un correo electrónico
+        val emailRegex = Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\$")
 
-            val response: Response<Any?> = if (emailRegex.matches(datosLogIn.nombre_correo)) {
-                // Si es un correo, llamar a las funciones relacionadas con humanos
-                UsuarioNetwork.retrofit.loginHumano(datosLogIn)
+        if (emailRegex.matches(datosLogIn.nombre_correo)) {
+            // Es un humano
+            loginHumanoVM(datosLogIn)
+        } else {
+            // Es un dios
+            loginDiosVM(datosLogIn)
+        }
+
+    }
+
+    private fun loginHumanoVM(datosLogIn: UsuarioLogIn) {
+        viewModelScope.launch {
+            Log.e("Manuel", "loginHumanoVM:")
+            val response: Response<Humano?> = UsuarioNetwork.retrofit.loginHumano(datosLogIn)
+            if (response.isSuccessful) {
+                Log.e("Manuel", "loginHumanoVM: ${response.body()} ha ido bien")
+                _humanoLogeado.value = response.body()
             } else {
-                // Si no es un correo, llamar a las funciones relacionadas con dioses
-                UsuarioNetwork.retrofit.loginDios(datosLogIn)
+                Log.e("Manuel", "loginHumanoVM: ${response.code()} no ha ido bien")
+                _errorCode.value = response.code()
             }
 
-            // Actualizar los valores del estado según la respuesta
+        }
+    }
 
-            _usuarioLogeado.value = response.body()
-            _errorCode.value = response.code()
+    private fun loginDiosVM(datosLogIn: UsuarioLogIn) {
+        Log.e("Manuel", "loginDiosVM: $datosLogIn")
+        viewModelScope.launch {
+
+            val response = UsuarioNetwork.retrofit.loginDios(datosLogIn)
+            if (response.isSuccessful) {
+                Log.e("Manuel", "loginDiosVM: ${response.body()}")
+                _diosLogeado.value = response.body()
+            } else {
+                Log.e("Manuel", "loginDiosVM: ${response.code()}")
+                _errorCode.value = response.code()
+            }
+
         }
     }
 }

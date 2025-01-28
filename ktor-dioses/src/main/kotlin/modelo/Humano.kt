@@ -1,5 +1,8 @@
 package modelo
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Humano(
     val id: Int,
     val nombre: String,

@@ -4,4 +4,9 @@
     <string name="password">Contraseña</string>
     <string name="iniciarSesion">Iniciar Sesion</string>
     <string name="salir">Salir</string>
+    <string name="tituloLogin">INICIAR SESION</string>
+    <string name="errPassword2">Contraseña Incorrecta</string>
+    <string name="errUsuario2">Usuario no encontrado</string>
+    <string name="msjSesionIniciada">Sesion Iniciada</string>
+    <string name="errRellenaCampos">Debes rellenar todos los campos</string>
 </resources>

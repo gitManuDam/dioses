@@ -2,14 +2,15 @@ package dao
 
 import modelo.Dios
 import modelo.Humano
+import modelo.UsuarioLogIn
 
 class UsuarioDAOImp:UsuarioDAO {
     override fun insertarHumano(humano: Humano): Boolean {
         // SQL con las columnas correspondientes de la tabla 'humanos'
         val sql = """
-        INSERT INTO humanos (nombre, correo, clave, destino, estado, foto, sabiduria, nobleza, virtud, audacia, idDios)
+            INSERT INTO humanos (nombre, correo, clave, destino, estado, foto, sabiduria, nobleza, virtud, audacia, idDios)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """
+        """.trimIndent()
 
         // Obtener la conexión a la base de datos
         val connection = Database.getConnection()
@@ -39,18 +40,24 @@ class UsuarioDAOImp:UsuarioDAO {
         return false
     }
 
-    override fun actualizarDestino(destino: Int, id: Int): Boolean {
-        val sql = "UPDATE humanos SET destino = ? WHERE id = ?"
-        val connection = Database.getConnection()
-        connection?.use {
-            val statement = it.prepareStatement(sql)
-            statement.setInt(1, destino)
-            statement.setInt(2, id)
 
-            return statement.executeUpdate() > 0
-        }
-        return false
-    }
+
+
+
+
+
+//    override fun actualizarDestino(destino: Int, id: Int): Boolean {
+//        val sql = "UPDATE humanos SET destino = ? WHERE id = ?"
+//        val connection = Database.getConnection()
+//        connection?.use {
+//            val statement = it.prepareStatement(sql)
+//            statement.setInt(1, destino)
+//            statement.setInt(2, id)
+//
+//            return statement.executeUpdate() > 0
+//        }
+//        return false
+//    }
 
 
     override fun eliminarHumano(id: Int): Boolean {
@@ -123,6 +130,57 @@ class UsuarioDAOImp:UsuarioDAO {
         return null
     }
 
+    override fun obtenerTodosLosHumanos(): List<Humano> {
+        TODO("Not yet implemented")
+    }
+
+
+
+    override fun insertarDios(dios: Dios): Boolean {
+        TODO("Not yet implemented")
+    }
+
+
+
+
+
+    override fun eliminarDios(id: Int): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun obtenerDiosPorId(id: Int): Dios? {
+        TODO("Not yet implemented")
+    }
+
+    override fun obtenerTodosLosDioses(): List<Dios> {
+        val sql = "SELECT * FROM dioses"
+        val diosList = mutableListOf<Dios>()
+        val connection = Database.getConnection()
+
+        connection?.use {
+            val statement = it.prepareStatement(sql)
+            val resultSet = statement.executeQuery()
+
+            while (resultSet.next()) {
+                val dios = Dios(
+                    id = resultSet.getInt("id"),
+                    nombre = resultSet.getString("nombre"),
+                    clave = resultSet.getString("clave"),
+                    sabiduria = resultSet.getInt("sabiduria"),
+                    nobleza = resultSet.getInt("nobleza"),
+                    virtud = resultSet.getInt("virtud"),
+                    maldad = resultSet.getInt("maldad"),
+                    audacia = resultSet.getInt("audacia"),
+                    foto = resultSet.getString("foto") // Aquí la foto la tomamos como String, ya que el tipo de la columna puede ser VARCHAR si es un enlace o ruta de archivo
+                )
+                diosList.add(dios)
+            }
+        }
+        return diosList
+    }
+
+
+
 
     override fun obtenerDiosPorNombre(nombre: String): Dios? {
         val sql = "SELECT * FROM dioses WHERE nombre = ?"
@@ -142,7 +200,7 @@ class UsuarioDAOImp:UsuarioDAO {
                     virtud = resultSet.getInt("virtud"),
                     maldad = resultSet.getInt("maldad"),
                     audacia = resultSet.getInt("audacia"),
-                    foto = resultSet.getInt("foto")
+                    foto = resultSet.getString("foto")
                 )
             }
         }

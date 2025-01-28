@@ -8,82 +8,132 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import modelo.Humano
 import modelo.Dios
+import modelo.UsuarioLogIn
 
 val usuarioDAO: UsuarioDAO = UsuarioDAOImp()
 
-fun Route.rutasUsuario(){
-    route("/registrarHumano") {
-        post {
+fun Route.rutasUsuario() {
+
+    // Rutas para Humanos
+    route("/humanos") {
+        post("/registrar") {
             val humano = call.receive<Humano>()
-            if (usuarioDAO.insertarHumano(humano)) {
-                call.respond(HttpStatusCode.Created, "Humano registrado correctamente.")
-            } else {
-                call.respond(HttpStatusCode.Conflict, "Error al registrar el humano.")
+            val existente = usuarioDAO.obtenerHumanoPorCorreo(humano.correo)
+            if (existente != null) {
+                return@post call.respond(HttpStatusCode.BadRequest, false)
             }
+
+            if (!usuarioDAO.insertarHumano(humano)) {
+                return@post call.respond(HttpStatusCode.Conflict, false)
+            }
+            call.respond(HttpStatusCode.Created, true)
         }
+
+//        put("/modificarPerfil") {
+//            val humano = call.receive<Humano>()
+//            val existente = usuarioDAO.obtenerHumanoPorId(humano.id) ?: return@put call.respond(HttpStatusCode.NotFound, false)
+//
+//            if (!usuarioDAO.modificarPerfilHumano(humano)) {
+//                return@put call.respond(HttpStatusCode.BadRequest, false)
+//            }
+//            call.respond(HttpStatusCode.Accepted, true)
+//        }
+
+        post("/login") {
+            val datosLogIn = call.receive<UsuarioLogIn>()
+            val humano = usuarioDAO.obtenerHumanoPorCorreo(datosLogIn.nombre_correo) ?: return@post call.respond(HttpStatusCode.NotFound, null)
+            if (humano.clave != datosLogIn.clave){
+                return@post call.respond(HttpStatusCode.BadRequest, null)
+            }
+            call.respond(HttpStatusCode.OK, humano)
+        }
+
+//        put("/modificarDestino/{id}") {
+//            val id = call.parameters["id"]?.toIntOrNull() ?: return@put call.respond(HttpStatusCode.BadRequest, false)
+//            val destino = call.receive<Int>()
+//            if (!usuarioDAO.modificarDestinoHumano(id, destino)) {
+//                return@put call.respond(HttpStatusCode.Conflict, false)
+//            }
+//            call.respond(HttpStatusCode.Accepted, true)
+//        }
+
+        delete("/eliminar/{id}") {
+            val id = call.parameters["id"]?.toIntOrNull() ?: return@delete call.respond(HttpStatusCode.BadRequest, false)
+            if (!usuarioDAO.eliminarHumano(id)) {
+                return@delete call.respond(HttpStatusCode.Conflict, false)
+            }
+            call.respond(HttpStatusCode.Accepted, true)
+        }
+
+        get("/{id}") {
+            val id = call.parameters["id"]?.toIntOrNull() ?: return@get call.respond(HttpStatusCode.BadRequest, null)
+            val humano = usuarioDAO.obtenerHumanoPorId(id) ?: return@get call.respond(HttpStatusCode.NotFound, null)
+            call.respond(HttpStatusCode.OK, humano)
+        }
+
+        get {
+            call.respond(HttpStatusCode.OK, usuarioDAO.obtenerTodosLosHumanos())
+        }
+
+
     }
 
-    // Ruta para obtener un humano por correo
-    route("/obtenerHumanoPorCorreo/{correo}") {
-        get("{correo}") {
-            val correo = call.parameters["correo"] ?: return@get call.respond(HttpStatusCode.BadRequest, "Correo no proporcionado.")
-            val humano = usuarioDAO.obtenerHumanoPorCorreo(correo)
-            if (humano != null) {
-                call.respond(HttpStatusCode.OK, humano)
-            } else {
-                call.respond(HttpStatusCode.NotFound, "Humano no encontrado.")
-            }
+    // Rutas para Dioses
+    route("/dioses") {
+        get {
+            call.respond(HttpStatusCode.OK, usuarioDAO.obtenerTodosLosDioses())
         }
-    }
+        post("/registrar") {
+            val dios = call.receive<Dios>()
+            val existente = usuarioDAO.obtenerDiosPorNombre(dios.nombre)
+            if (existente != null) {
+                return@post call.respond(HttpStatusCode.BadRequest, false)
+            }
 
-    // Ruta para obtener un humano por ID
-    route("/obtenerHumanoPorId/{id}") {
-        get("{id}") {
-            val id = call.parameters["id"]?.toIntOrNull() ?: return@get call.respond(HttpStatusCode.BadRequest, "ID inválido.")
-            val humano = usuarioDAO.obtenerHumanoPorId(id)
-            if (humano != null) {
-                call.respond(HttpStatusCode.OK, humano)
-            } else {
-                call.respond(HttpStatusCode.NotFound, "Humano no encontrado.")
+            if (!usuarioDAO.insertarDios(dios)) {
+                return@post call.respond(HttpStatusCode.Conflict, false)
             }
+            call.respond(HttpStatusCode.Created, true)
         }
-    }
 
-    // Ruta para actualizar el destino de un humano
-    route("/actualizarDestino/{id}") {
-        put("{id}") {
-            val id = call.parameters["id"]?.toIntOrNull() ?: return@put call.respond(HttpStatusCode.BadRequest, "ID inválido.")
-            val destino = call.receive<Int>()
-            if (usuarioDAO.actualizarDestino(destino, id)) {
-                call.respond(HttpStatusCode.Accepted, "Destino actualizado correctamente.")
-            } else {
-                call.respond(HttpStatusCode.Conflict, "Error al actualizar el destino.")
+        post("/login") {
+            println("Login dios llamado")
+            val datosLogIn = call.receive<UsuarioLogIn>()
+            println("${datosLogIn.nombre_correo} != ${datosLogIn.clave}")
+            val dios = usuarioDAO.obtenerDiosPorNombre(datosLogIn.nombre_correo) ?: return@post call.respond(HttpStatusCode.NotFound, null)
+            if (dios.clave != datosLogIn.clave){
+                println("${dios.clave} != ${datosLogIn.clave}")
+                return@post call.respond(HttpStatusCode.BadRequest, null)
             }
+            call.respond(HttpStatusCode.OK, dios)
         }
-    }
 
-    // Ruta para eliminar un humano
-    route("/eliminarHumano/{id}") {
-        delete("{id}") {
-            val id = call.parameters["id"]?.toIntOrNull() ?: return@delete call.respond(HttpStatusCode.BadRequest, "ID inválido.")
-            if (usuarioDAO.eliminarHumano(id)) {
-                call.respond(HttpStatusCode.OK, "Humano eliminado correctamente.")
-            } else {
-                call.respond(HttpStatusCode.Conflict, "Error al eliminar el humano.")
-            }
-        }
-    }
+//        put("/modificarPerfil") {
+//            val dios = call.receive<Dios>()
+//            val existente = usuarioDAO.obtenerDiosPorId(dios.id) ?: return@put call.respond(HttpStatusCode.NotFound, false)
+//
+//            if (!usuarioDAO.modificarPerfilDios(dios)) {
+//                return@put call.respond(HttpStatusCode.BadRequest, false)
+//            }
+//            call.respond(HttpStatusCode.Accepted, true)
+//        }
 
-    // Ruta para obtener un dios por nombre
-    route("/obtenerDiosPorNombre/{nombre}") {
-        get("{nombre}") {
-            val nombre = call.parameters["nombre"] ?: return@get call.respond(HttpStatusCode.BadRequest, "Nombre no proporcionado.")
-            val dios = usuarioDAO.obtenerDiosPorNombre(nombre)
-            if (dios != null) {
-                call.respond(HttpStatusCode.OK, dios)
-            } else {
-                call.respond(HttpStatusCode.NotFound, "Dios no encontrado.")
+        delete("/eliminar/{id}") {
+            val id = call.parameters["id"]?.toIntOrNull() ?: return@delete call.respond(HttpStatusCode.BadRequest, false)
+            if (!usuarioDAO.eliminarDios(id)) {
+                return@delete call.respond(HttpStatusCode.Conflict, false)
             }
+            call.respond(HttpStatusCode.Accepted, true)
         }
+
+        get("/{id}") {
+            val id = call.parameters["id"]?.toIntOrNull() ?: return@get call.respond(HttpStatusCode.BadRequest, null)
+            val dios = usuarioDAO.obtenerDiosPorId(id) ?: return@get call.respond(HttpStatusCode.NotFound, null)
+            call.respond(HttpStatusCode.OK, dios)
+        }
+
+
+
+
     }
 }
