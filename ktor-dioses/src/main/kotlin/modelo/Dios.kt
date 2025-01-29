@@ -1,5 +1,7 @@
 package modelo
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Dios(
     val id: Int,            // Identificador único del dios
     val nombre: String,     // Nombre del dios
