@@ -10,4 +10,9 @@
         android:name="com.example.app_dioses.ventanas.LogIn.FragLogIn"
         android:label="fragment_frag_log_in"
         tools:layout="@layout/fragment_frag_log_in" />
+    <fragment
+        android:id="@+id/nav_fragRegistro"
+        android:name="com.example.app_dioses.ventanas.LogIn.FragRegistro"
+        android:label="fragment_frag_registro"
+        tools:layout="@layout/fragment_frag_registro" />
 </navigation>

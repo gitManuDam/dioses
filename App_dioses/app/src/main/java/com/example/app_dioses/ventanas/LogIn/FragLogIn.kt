@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.example.app_dioses.R
 import com.example.app_dioses.databinding.FragmentFragLogInBinding
 import com.example.app_dioses.modelo.UsuarioLogIn
@@ -53,11 +54,13 @@ class FragLogIn : Fragment() {
         mainViewModel.diosLogeado.observe(viewLifecycleOwner){
             if (it!=null){
                 Toast.makeText(requireContext(), getString(R.string.msjSesionIniciada), Toast.LENGTH_SHORT).show()
+                limpiarCampos()
             }
         }
         mainViewModel.humanoLogeado.observe(viewLifecycleOwner){
             if (it!=null){
                 Toast.makeText(requireContext(), getString(R.string.msjSesionIniciada), Toast.LENGTH_SHORT).show()
+                limpiarCampos()
             }
         }
 
@@ -85,9 +88,10 @@ class FragLogIn : Fragment() {
             }
         }
 
-        // añadir boton de registrarse----------------------------------------------------------------------------
-        //-------------------------------------------------------
 
+        binding.btnRegistro.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.nav_fragRegistro)
+        }
 
         binding.btnSalir.setOnClickListener {
             requireActivity().finish()

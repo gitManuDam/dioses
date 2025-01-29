@@ -6,15 +6,13 @@ import modelo.UsuarioLogIn
 
 class UsuarioDAOImp:UsuarioDAO {
     override fun insertarHumano(humano: Humano): Boolean {
-        // SQL con las columnas correspondientes de la tabla 'humanos'
+
         val sql = """
-            INSERT INTO humanos (nombre, correo, clave, destino, estado, foto, sabiduria, nobleza, virtud, audacia, idDios)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO humanos (nombre, correo, clave, destino, estado, foto, sabiduria, nobleza, virtud,maldad, audacia, idDios)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)
         """.trimIndent()
 
-        // Obtener la conexión a la base de datos
         val connection = Database.getConnection()
-
         connection?.use {
             // Preparar la sentencia
             val statement = it.prepareStatement(sql)
@@ -29,8 +27,9 @@ class UsuarioDAOImp:UsuarioDAO {
             statement.setInt(7, humano.sabiduria)
             statement.setInt(8, humano.nobleza)
             statement.setInt(9, humano.virtud)
-            statement.setInt(10, humano.audacia)
-            statement.setInt(11, humano.idDios)
+            statement.setInt(10, humano.maldad)
+            statement.setInt(11, humano.audacia)
+            statement.setInt(12, humano.idDios)
 
             // Ejecutar la sentencia y verificar si se insertó correctamente
             return statement.executeUpdate() > 0
@@ -94,6 +93,7 @@ class UsuarioDAOImp:UsuarioDAO {
                     nobleza = resultSet.getInt("nobleza"),
                     virtud = resultSet.getInt("virtud"),
                     audacia = resultSet.getInt("audacia"),
+                    maldad = resultSet.getInt("maldad"),
                     idDios = resultSet.getInt("idDios")
                 )
             }
@@ -123,6 +123,7 @@ class UsuarioDAOImp:UsuarioDAO {
                     nobleza = resultSet.getInt("nobleza"),
                     virtud = resultSet.getInt("virtud"),
                     audacia = resultSet.getInt("audacia"),
+                    maldad = resultSet.getInt("maldad"),
                     idDios = resultSet.getInt("idDios")
                 )
             }

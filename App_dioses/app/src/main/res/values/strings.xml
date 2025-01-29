@@ -9,4 +9,14 @@
     <string name="errUsuario2">Usuario no encontrado</string>
     <string name="msjSesionIniciada">Sesion Iniciada</string>
     <string name="errRellenaCampos">Debes rellenar todos los campos</string>
+    <string name="registro">Registrate</string>
+    <string name="confirmarPassword">Confirmar Contraseña</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="registrar">Registrate</string>
+    <string name="Correo">Correo Electronico</string>
+    <string name="tituloRegistro">Registrar Humano</string>
+    <string name="errConfirmarClave">Las contraseñas no coinciden</string>
+    <string name="msjRegistroExitoso">Usuario creado correctamente</string>
+    <string name="errRegistro">Error al registrar un humano</string>
+    <string name="errCorreo">El correo debe se valido</string>
 </resources>

@@ -5,27 +5,29 @@ import java.io.Serializable
 
 data class Humano(
     @SerializedName("id")
-    val id: Int,
+    var id: Int,
     @SerializedName("nombre")
-    val nombre: String,
+    var nombre: String,
     @SerializedName("correo")
-    val correo: String,
+    var correo: String,
     @SerializedName("clave")
-    val clave: String,
+    var clave: String,
     @SerializedName("destino")
-    val destino: Int,
+    var destino: Int,
     @SerializedName("estado")
-    val estado: Int,
+    var estado: Int,
     @SerializedName("foto")
-    val foto: String,
+    var foto: String,
     @SerializedName("sabiduria")
-    val sabiduria: Int,
+    var sabiduria: Int,
     @SerializedName("nobleza")
-    val nobleza: Int,
+    var nobleza: Int,
     @SerializedName("virtud")
-    val virtud: Int,
+    var virtud: Int,
+    @SerializedName("maldad")
+    var maldad: Int,
     @SerializedName("audacia")
-    val audacia: Int,
+    var audacia: Int,
     @SerializedName("idDios")
-    val idDios: Int
+    var idDios: Int
 ) : Serializable

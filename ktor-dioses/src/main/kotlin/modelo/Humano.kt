@@ -14,6 +14,7 @@ data class Humano(
     val sabiduria: Int,
     val nobleza: Int,
     val virtud: Int,
+    val maldad: Int,
     val audacia: Int,
     val idDios: Int
 )

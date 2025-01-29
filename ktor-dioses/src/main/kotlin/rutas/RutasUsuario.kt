@@ -17,15 +17,19 @@ fun Route.rutasUsuario() {
     // Rutas para Humanos
     route("/humanos") {
         post("/registrar") {
+            println("registrar llamado")
             val humano = call.receive<Humano>()
             val existente = usuarioDAO.obtenerHumanoPorCorreo(humano.correo)
             if (existente != null) {
+                println("humano ya existe")
                 return@post call.respond(HttpStatusCode.BadRequest, false)
             }
 
             if (!usuarioDAO.insertarHumano(humano)) {
+                println("Error al insertar humano")
                 return@post call.respond(HttpStatusCode.Conflict, false)
             }
+            println("Humano insertado")
             call.respond(HttpStatusCode.Created, true)
         }
 

@@ -31,11 +31,10 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.nav_fragLogIn -> {
                     binding.toolBarLogin.title = resources.getString(R.string.tituloLogin)
-
                 }
-//                R.id.nav_fragActivarCuenta -> {
-//                    binding.toolBarLogin.title = resources.getString(R.string.tituloActivarCuenta)
-//                }
+                R.id.nav_fragRegistro -> {
+                    binding.toolBarLogin.title = resources.getString(R.string.tituloRegistro)
+                }
             }
         }
     }

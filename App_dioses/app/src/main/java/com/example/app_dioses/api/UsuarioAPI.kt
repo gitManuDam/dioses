@@ -14,7 +14,7 @@ interface UsuarioAPI {
 
     // Rutas para Humanos
 
-    @POST("humanos/registrarHumano")
+    @POST("humanos/registrar")
     suspend fun registrarHumano(@Body humano: Humano): Response<Boolean>
 
     @PUT("humanos/modificarPerfilHumano")
