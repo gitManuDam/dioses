@@ -1,5 +1,6 @@
 package com.example.app_dioses.ventanas.LogIn
 
+import android.content.Intent
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import androidx.navigation.Navigation
 import com.example.app_dioses.R
 import com.example.app_dioses.databinding.FragmentFragLogInBinding
 import com.example.app_dioses.modelo.UsuarioLogIn
+import com.example.app_dioses.ventanas.Dios.DiosActivity
 
 class FragLogIn : Fragment() {
     private var _binding: FragmentFragLogInBinding? = null
@@ -53,7 +55,10 @@ class FragLogIn : Fragment() {
 
         mainViewModel.diosLogeado.observe(viewLifecycleOwner){
             if (it!=null){
-                Toast.makeText(requireContext(), getString(R.string.msjSesionIniciada), Toast.LENGTH_SHORT).show()
+                val intent = Intent(requireContext(), DiosActivity::class.java)
+                intent.putExtra("Usuario", it)
+                Log.e("Manuel", "onCreateView: $it")
+                startActivity(intent)
                 limpiarCampos()
             }
         }

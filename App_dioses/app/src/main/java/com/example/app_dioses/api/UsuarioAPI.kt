@@ -34,6 +34,8 @@ interface UsuarioAPI {
 
     @GET("humanos")
     suspend fun obtenerTodosLosHumanos(): Response<MutableList<Humano>>
+    @GET("humanos/{idDios}")
+    suspend fun obtenerHumanosPorIdDios(@Path("idDios") idDios: Int): Response<MutableList<Humano>>
 
     @GET("humanos/filtrarHumanosPorNombre/{nombre}")
     suspend fun filtrarHumanosPorNombre(@Path("nombre") nombre: String): Response<MutableList<Humano>>

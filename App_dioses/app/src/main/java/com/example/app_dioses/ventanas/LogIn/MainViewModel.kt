@@ -26,6 +26,7 @@ class MainViewModel: ViewModel() {
     val diosLogeado: LiveData<Dios?> get() = _diosLogeado
 
     private fun loginDiosID(id: Int) {
+        Log.e("Manuel", "loginDiosID: $id")
         viewModelScope.launch {
             val response: Response<Dios?> = UsuarioNetwork.retrofit.obtenerDiosPorId(id)
             if (response.isSuccessful) {
@@ -35,6 +36,7 @@ class MainViewModel: ViewModel() {
             }
         }
     }
+
     private fun loginHumanoID(id: Int) {
         viewModelScope.launch {
             val response: Response<Humano?> = UsuarioNetwork.retrofit.obtenerHumanoPorId(id)
@@ -48,7 +50,7 @@ class MainViewModel: ViewModel() {
     }
 
     fun reiniciarSesionVM(usuario:Any){
-
+        Log.e("Manuel", "reiniciarSesionVM: $usuario")
         when(usuario){
             is Dios -> loginDiosID(usuario.id)
             is Humano -> loginHumanoID(usuario.id)

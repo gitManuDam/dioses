@@ -78,10 +78,7 @@ class FragRegistro : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnRegistrarRegistro.setOnClickListener {
-            Log.e("Manuel", binding.etCorreo.text.toString())
-            Log.e("Manuel", binding.etClaveRegistro.text.toString())
-            Log.e("Manuel", binding.etConfClaveRegistro.text.toString())
-            Log.e("Manuel", binding.etHumanoRegistro.text.toString())
+
             if (binding.etHumanoRegistro.text.isNullOrBlank() ||
                 binding.etClaveRegistro.text.isNullOrBlank()||
                 binding.etCorreo.text.isNullOrBlank()||
