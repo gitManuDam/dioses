@@ -135,6 +135,38 @@ class UsuarioDAOImp:UsuarioDAO {
         TODO("Not yet implemented")
     }
 
+    override fun obtenerHumanosPorIdDios(idDios: Int): List<Humano> {
+        val sql = "SELECT * FROM humanos WHERE idDios = ?"
+        val connection = Database.getConnection()
+        val humanos = mutableListOf<Humano>()
+
+        connection?.use {
+            val statement = it.prepareStatement(sql)
+            statement.setInt(1, idDios)
+            val resultSet = statement.executeQuery()
+
+            while (resultSet.next()) {
+                val humano = Humano(
+                    id = resultSet.getInt("id"),
+                    nombre = resultSet.getString("nombre"),
+                    correo = resultSet.getString("correo"),
+                    clave = resultSet.getString("clave"),
+                    destino = resultSet.getInt("destino"),
+                    estado = resultSet.getInt("estado"),
+                    foto = resultSet.getString("foto"),
+                    sabiduria = resultSet.getInt("sabiduria"),
+                    nobleza = resultSet.getInt("nobleza"),
+                    virtud = resultSet.getInt("virtud"),
+                    audacia = resultSet.getInt("audacia"),
+                    maldad = resultSet.getInt("maldad"),
+                    idDios = resultSet.getInt("idDios")
+                )
+                humanos.add(humano)
+            }
+        }
+        return humanos
+    }
+
 
 
     override fun insertarDios(dios: Dios): Boolean {
@@ -150,7 +182,29 @@ class UsuarioDAOImp:UsuarioDAO {
     }
 
     override fun obtenerDiosPorId(id: Int): Dios? {
-        TODO("Not yet implemented")
+        val sql = "SELECT * FROM dioses WHERE id = ?"
+        val connection = Database.getConnection()
+        connection?.use {
+            val statement = it.prepareStatement(sql)
+            statement.setInt(1, id)
+            val resultSet = statement.executeQuery()
+
+            if (resultSet.next()) {
+                return Dios(
+                    id = resultSet.getInt("id"),
+                    nombre = resultSet.getString("nombre"),
+                    clave = resultSet.getString("clave"),
+                    sabiduria = resultSet.getInt("sabiduria"),
+                    nobleza = resultSet.getInt("nobleza"),
+                    virtud = resultSet.getInt("virtud"),
+                    maldad = resultSet.getInt("maldad"),
+                    audacia = resultSet.getInt("audacia"),
+                    foto = resultSet.getString("foto")
+                )
+            }
+        }
+        return null
+
     }
 
     override fun obtenerTodosLosDioses(): List<Dios> {

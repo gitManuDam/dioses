@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_dios"
+    app:startDestination="@id/nav_fragProtegidos">
+
+    <fragment
+        android:id="@+id/nav_fragProtegidos"
+        android:name="com.example.app_dioses.ventanas.Dios.FragProtegidos"
+        android:label="fragment_frag_protegidos"
+        tools:layout="@layout/fragment_frag_protegidos" />
+</navigation>

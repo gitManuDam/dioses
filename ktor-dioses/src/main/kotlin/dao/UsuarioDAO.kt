@@ -10,6 +10,7 @@ interface UsuarioDAO {
     fun obtenerHumanoPorId(id: Int): Humano?
     fun obtenerHumanoPorCorreo(correo:String):Humano?
     fun obtenerTodosLosHumanos(): List<Humano>
+    fun obtenerHumanosPorIdDios(idDios:Int): List<Humano>
 
 
 

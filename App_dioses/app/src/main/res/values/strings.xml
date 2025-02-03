@@ -19,4 +19,7 @@
     <string name="msjRegistroExitoso">Usuario creado correctamente</string>
     <string name="errRegistro">Error al registrar un humano</string>
     <string name="errCorreo">El correo debe se valido</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="sin_humanos">No hay humanos</string>
+    <string name="tituloProtegidos">Humanos Bajo Mi Proteccion</string>
 </resources>
