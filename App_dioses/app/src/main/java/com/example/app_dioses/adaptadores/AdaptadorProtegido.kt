@@ -14,14 +14,14 @@ import com.example.app_dioses.ventanas.Dios.FragProtegidosViewModel
 import com.example.app_dioses.ventanas.LogIn.MainViewModel
 
 class AdaptadorProtegido (var humanos: ArrayList<Humano>,
-                          var contexto: Context,
+
                           var mainviewModel: MainViewModel,
                           var viewModel: FragProtegidosViewModel):RecyclerView.Adapter<AdaptadorProtegido.ViewHolder>(){
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = humanos.get(position)
-        holder.bind(item,contexto,position,mainviewModel,viewModel)
+        holder.bind(item,position,mainviewModel,viewModel)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -43,7 +43,7 @@ class AdaptadorProtegido (var humanos: ArrayList<Humano>,
         val fotoHumano = view.findViewById(R.id.ivFotoHumano) as ImageView
         fun bind(
             item: Humano,
-            contexto: Context,
+
             position: Int,
             mainviewModel: MainViewModel,
             viewModel: FragProtegidosViewModel

@@ -38,7 +38,7 @@ class FragProtegidos : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.e("Manuel", "FragProtegidos.onCreateView: ${mainViewModel.diosLogeado.value}")
+        Log.e("Manuel", "FragProtegidos.onCreateView:ver dioslogueado ${mainViewModel.diosLogeado.value}")
         _binding = FragmentFragProtegidosBinding.inflate(inflater, container, false)
         val root: View = binding.root
         Log.e("Manuel", "FragProtegidos.onCreateView: probando")
@@ -68,14 +68,15 @@ class FragProtegidos : Fragment() {
         Log.e("Manuel", "onViewCreated: FragProtegidos ")
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        Log.e("Manuel", "onViewCreated: FragProtegidos ${mainViewModel.diosLogeado.value}")
         viewModel.obtenerHumanosProtegidos(mainViewModel.diosLogeado.value!!.id)
 
     }
     private fun setupRecyclerView() {
-        Log.e("Manuel", "setupRecyclerView: ")
+        Log.e("Manuel", "setupRecyclerView: FragProtegidos")
         val linearLayoutManager = LinearLayoutManager(requireContext())
         binding.recyViewRanking.layoutManager = linearLayoutManager
-        adaptador = AdaptadorProtegido(datos, requireContext(), mainViewModel, viewModel)
+        adaptador = AdaptadorProtegido(datos,  mainViewModel, viewModel)
         binding.recyViewRanking.adapter = adaptador
 
     }

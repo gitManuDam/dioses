@@ -30,10 +30,12 @@ class DiosActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityDiosBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Log.e("Manuel", "onCreate:Intent ${intent.getSerializableExtra("Usuario")}")
+        Log.e("Manuel", "Activity Dios onCreate:Intent ${intent.getSerializableExtra("Usuario")}")
         mainViewModel.reiniciarSesionVM(intent.getSerializableExtra("Usuario")!! as Dios)
+        Log.e("Manuel", "Activty Dios onCreate:Dios Logueado ${mainViewModel.diosLogeado.value}")
 
         setSupportActionBar(binding.toolBarDios)
+
 
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.frag_cont_dios) as NavHostFragment

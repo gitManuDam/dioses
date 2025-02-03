@@ -75,9 +75,9 @@ fun Route.rutasUsuario() {
             call.respond(HttpStatusCode.OK, humano)
         }
 
-        get("/{idDios}"){
+        get("/dios/{idDios}"){
             println("buscando humanos por idDios")
-            val id = call.parameters["id"]?.toIntOrNull() ?: return@get call.respond(HttpStatusCode.BadRequest, null)
+            val id = call.parameters["idDios"]?.toIntOrNull() ?: return@get call.respond(HttpStatusCode.BadRequest, null)
             val humanos = usuarioDAO.obtenerHumanosPorIdDios(id) ?: return@get call.respond(HttpStatusCode.NotFound, null)
             call.respond(HttpStatusCode.OK, humanos)
         }
@@ -143,6 +143,7 @@ fun Route.rutasUsuario() {
             val dios = usuarioDAO.obtenerDiosPorId(id) ?: return@get call.respond(HttpStatusCode.NotFound, null)
             println("Dios buscado por id: $dios")
             call.respond(HttpStatusCode.OK, dios)
+
         }
 
 
