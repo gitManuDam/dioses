@@ -22,4 +22,7 @@
     <string name="eliminar">Eliminar</string>
     <string name="sin_humanos">No hay humanos</string>
     <string name="tituloProtegidos">Humanos Bajo Mi Proteccion</string>
+    <string name="tituloPruebas">Pruebas Creadas</string>
+    <string name="tituloPerfil">Mi Perfil</string>
+    <string name="tituloCerrarSesion">Cerrar Sesion</string>
 </resources>

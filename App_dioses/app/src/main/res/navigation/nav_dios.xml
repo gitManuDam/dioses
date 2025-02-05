@@ -10,4 +10,29 @@
         android:name="com.example.app_dioses.ventanas.Dios.FragProtegidos"
         android:label="fragment_frag_protegidos"
         tools:layout="@layout/fragment_frag_protegidos" />
+    <fragment
+        android:id="@+id/nav_fragAsignarPrueba"
+        android:name="com.example.app_dioses.ventanas.Dios.FragAsignarPrueba"
+        android:label="fragment_frag_asignar_prueba"
+        tools:layout="@layout/fragment_frag_asignar_prueba" />
+    <fragment
+        android:id="@+id/nav_fragCrearHumano"
+        android:name="com.example.app_dioses.ventanas.Dios.FragCrearHumano"
+        android:label="fragment_frag_crear_humano"
+        tools:layout="@layout/fragment_frag_crear_humano" />
+    <fragment
+        android:id="@+id/nav_fragCrearPrueba"
+        android:name="com.example.app_dioses.ventanas.Dios.FragCrearPrueba"
+        android:label="fragment_frag_crear_prueba"
+        tools:layout="@layout/fragment_frag_crear_prueba" />
+    <fragment
+        android:id="@+id/nav_fragPruebas"
+        android:name="com.example.app_dioses.ventanas.Dios.FragPruebas"
+        android:label="fragment_frag_pruebas"
+        tools:layout="@layout/fragment_frag_pruebas" />
+    <fragment
+        android:id="@+id/nav_fragPerfil"
+        android:name="com.example.app_dioses.ventanas.FragPerfil"
+        android:label="fragment_frag_perfil"
+        tools:layout="@layout/fragment_frag_perfil" />
 </navigation>

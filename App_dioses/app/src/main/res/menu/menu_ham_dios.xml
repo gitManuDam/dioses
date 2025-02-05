@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_fragProtegidos"
+        android:title="@string/tituloProtegidos"
+        />
+    <item android:id="@+id/nav_fragPruebas"
+        android:title="@string/tituloPruebas"
+        />
+    <item android:id="@+id/nav_fragPerfil"
+        android:title="@string/tituloPerfil"
+        />
+
+</menu>
