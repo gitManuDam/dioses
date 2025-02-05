@@ -7,4 +7,11 @@ object Parametros {
     var cloud_name = "dddmoaxwk"
     var api_secret=  "nsf7ErJgXJrZz-b6vgqDzwNGIy8"
     var api_key = "778325179589474"
+
+    //tipos de pruebas
+    var eleccion="eleccion"
+    var resL="reL"
+    var valoracion="val"
+    var pp="pp"
+
 }

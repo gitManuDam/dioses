@@ -25,4 +25,9 @@
     <string name="tituloPruebas">Pruebas Creadas</string>
     <string name="tituloPerfil">Mi Perfil</string>
     <string name="tituloCerrarSesion">Cerrar Sesion</string>
+    <string name="tituloCrearHumano">Crear Humanos</string>
+    <string name="tituloCrearPrueba">Crear Pruebas</string>
+    <string name="tituloAsignarPrueba">Asignar Prueba</string>
+    <string name="msjCerrarSesion">Cerrando Sesion</string>
+    <string name="Aniadir">Añadir</string>
 </resources>

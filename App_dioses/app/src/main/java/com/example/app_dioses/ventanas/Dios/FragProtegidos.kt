@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.app_dioses.R
 import com.example.app_dioses.adaptadores.AdaptadorProtegido
 import com.example.app_dioses.databinding.FragmentFragProtegidosBinding
 import com.example.app_dioses.modelo.Humano
@@ -55,6 +57,7 @@ class FragProtegidos : Fragment() {
 
         }
 
+
         return root
 
     }
@@ -68,16 +71,21 @@ class FragProtegidos : Fragment() {
         Log.e("Manuel", "onViewCreated: FragProtegidos ")
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+
         Log.e("Manuel", "onViewCreated: FragProtegidos ${mainViewModel.diosLogeado.value}")
         viewModel.obtenerHumanosProtegidos(mainViewModel.diosLogeado.value!!.id)
+
+        binding.btnAniadirHumano.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.nav_fragCrearHumano)
+        }
 
     }
     private fun setupRecyclerView() {
         Log.e("Manuel", "setupRecyclerView: FragProtegidos")
         val linearLayoutManager = LinearLayoutManager(requireContext())
-        binding.recyViewRanking.layoutManager = linearLayoutManager
+        binding.recyViewProtegidos.layoutManager = linearLayoutManager
         adaptador = AdaptadorProtegido(datos,  mainViewModel, viewModel)
-        binding.recyViewRanking.adapter = adaptador
+        binding.recyViewProtegidos.adapter = adaptador
 
     }
 }
