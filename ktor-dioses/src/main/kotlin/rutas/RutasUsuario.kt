@@ -22,12 +22,12 @@ fun Route.rutasUsuario() {
             val existente = usuarioDAO.obtenerHumanoPorCorreo(humano.correo)
             if (existente != null) {
                 println("humano ya existe")
-                return@post call.respond(HttpStatusCode.BadRequest, false)
+                return@post call.respond(HttpStatusCode.Conflict, false)
             }
 
             if (!usuarioDAO.insertarHumano(humano)) {
                 println("Error al insertar humano")
-                return@post call.respond(HttpStatusCode.Conflict, false)
+                return@post call.respond(HttpStatusCode.BadRequest, false)
             }
             println("Humano insertado")
             call.respond(HttpStatusCode.Created, true)

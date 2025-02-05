@@ -30,4 +30,10 @@
     <string name="tituloAsignarPrueba">Asignar Prueba</string>
     <string name="msjCerrarSesion">Cerrando Sesion</string>
     <string name="Aniadir">Añadir</string>
+    <string name="numHumanos">Numero de humanos a crear</string>
+    <string name="ingresaNumero">Ingresa el número</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="msjHumanoRegistrado">El humano ha sido registrado</string>
+    <string name="errHumanoExistente">El humano ya existe</string>
+    <string name="msjHumanoCancelado">Cancelando la insercion de humanos</string>
 </resources>
