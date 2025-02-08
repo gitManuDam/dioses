@@ -54,4 +54,9 @@
     <string name="Opcion2">Opcion 2</string>
     <string name="Correcta">Opcion Correcta</string>
     <string name="intrValor">Valor(1 a 5)</string>
+    <string name="palabrasClave">Introduce las palabras clave separadas por comas(,)</string>
+    <string name="ejPalabrasClave">amor,dinero</string>
+    <string name="porcenAciertos">Porcentaje de Aciertos</string>
+    <string name="dificultad">Dificultad</string>
+    <string name="descripcion">Descripcion</string>
 </resources>
