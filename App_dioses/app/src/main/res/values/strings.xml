@@ -36,4 +36,22 @@
     <string name="msjHumanoRegistrado">El humano ha sido registrado</string>
     <string name="errHumanoExistente">El humano ya existe</string>
     <string name="msjHumanoCancelado">Cancelando la insercion de humanos</string>
+    <string name="sin_pruebas">No hay pruebas</string>
+    <string name="Asignar">Asignar</string>
+    <string name="eliminarPrueba">Eliminar Prueba</string>
+    <string name="PreguntaEliminarPrueba">¿Desea Eliminar la prueba</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
+    <string name="cancelarEliminacion">Borrado Cancelado</string>
+    <string name="Titulo">Titulo</string>
+    <string name="ingresaDestino">Destino de la prueba</string>
+    <string name="tipoPrueba">Tipo</string>
+    <string name="crearPrueba">Crea la prueba</string>
+    <string name="pregunta">Pregunta</string>
+    <string name="intPregunta">Introduce la pregunta</string>
+    <string name="Opcion1">Opcion 1</string>
+    <string name="atributo">Atributo</string>
+    <string name="Opcion2">Opcion 2</string>
+    <string name="Correcta">Opcion Correcta</string>
+    <string name="intrValor">Valor(1 a 5)</string>
 </resources>

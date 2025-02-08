@@ -14,7 +14,13 @@
         android:id="@+id/nav_fragAsignarPrueba"
         android:name="com.example.app_dioses.ventanas.Dios.FragAsignarPrueba"
         android:label="fragment_frag_asignar_prueba"
-        tools:layout="@layout/fragment_frag_asignar_prueba" />
+        tools:layout="@layout/fragment_frag_asignar_prueba">
+        <argument
+            android:name="idPrueba"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+
     <fragment
         android:id="@+id/nav_fragCrearHumano"
         android:name="com.example.app_dioses.ventanas.Dios.FragCrearHumano"
