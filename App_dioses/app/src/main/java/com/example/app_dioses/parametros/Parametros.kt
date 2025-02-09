@@ -9,9 +9,12 @@ object Parametros {
     var api_key = "778325179589474"
 
     //tipos de pruebas
-    var eleccion="eleccion"
-    var resL="reL"
-    var valoracion="val"
-    var pp="pp"
+    var eleccion="Eleccion"
+    var resL="Respuesta Libre"
+    var afinidad="Afinidad"
+    var pp="Puntual"
+
+    //atributos
+    var atributos= listOf("sabiduria", "nobleza", "virtud", "maldad", "audacia")
 
 }
