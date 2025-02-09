@@ -56,7 +56,8 @@ class AdaptadorPruebas(var pruebas: ArrayList<Prueba>,var viewModel: FragPruebas
             tipoPrueba.text = item.tipo
 
             btnAsignar.setOnClickListener {
-                Navigation.findNavController(it).navigate(R.id.nav_fragAsignarPrueba, bundleOf(Pair("idPrueba", item.id)))
+                val bundle = bundleOf("Prueba" to item)
+                Navigation.findNavController(it).navigate(R.id.nav_fragAsignarPrueba, bundle)
             }
 
             btnEliminar.setOnClickListener {

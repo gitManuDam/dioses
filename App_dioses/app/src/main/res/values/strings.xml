@@ -59,4 +59,10 @@
     <string name="porcenAciertos">Porcentaje de Aciertos</string>
     <string name="dificultad">Dificultad</string>
     <string name="descripcion">Descripcion</string>
+    <string name="uno">Uno</string>
+    <string name="dos">Dos</string>
+    <string name="textHumanoSeleccionado">Humano Seleccionado:</string>
+    <string name="textEligeUnHumano">Elige un humano</string>
+    <string name="AsignarAfin">Asignar al mas Afin</string>
+    <string name="AsignarTodos">Asignar a todos</string>
 </resources>

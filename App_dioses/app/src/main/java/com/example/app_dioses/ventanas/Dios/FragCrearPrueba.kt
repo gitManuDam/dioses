@@ -13,6 +13,11 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.example.app_dioses.R
 import com.example.app_dioses.databinding.FragmentFragCrearPruebaBinding
+import com.example.app_dioses.modelo.PreguntaAfinidad
+import com.example.app_dioses.modelo.PreguntaEleccion
+import com.example.app_dioses.modelo.PreguntaRl
+import com.example.app_dioses.modelo.Prueba
+import com.example.app_dioses.modelo.PruebaPuntales
 import com.example.app_dioses.parametros.Parametros
 import com.example.app_dioses.ventanas.LogIn.MainViewModel
 
@@ -195,7 +200,13 @@ class FragCrearPrueba : Fragment() {
             }
         }
 
-
+        viewModel.errorCode.observe(viewLifecycleOwner){error ->
+            if (error!=null){
+                //Implementara los mensajes de error para ver el seguimiento
+                Toast.makeText(requireContext(), error.toString(), Toast.LENGTH_SHORT).show()
+                viewModel.restError()
+            }
+        }
 
 
 
@@ -219,6 +230,13 @@ class FragCrearPrueba : Fragment() {
                 Toast.makeText(requireContext(), R.string.errRellenaCampos, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            var prueba = Prueba(
+                id=0,
+                idDios=mainViewModel.diosLogeado.value!!.id,
+                titulo=binding.etTituloPrueba.text.toString(),
+                destino=binding.etDestino.text.toString().toInt(),
+                tipo=binding.spTipoPrueba.selectedItem.toString()
+            )
             when(binding.spTipoPrueba.selectedItem.toString()){
                 Parametros.eleccion -> {
                     // Validar campos visibles cuando se selecciona "eleccion"
@@ -234,6 +252,18 @@ class FragCrearPrueba : Fragment() {
                     } else {
                         // Proceder con la inserción de la prueba
                         Log.d("Manuel", "Campos completos para elección")
+                        var pe=PreguntaEleccion(
+                            idPrueba=0,
+                            pregunta=binding.etPregunta.text.toString(),
+                            opcion1 = binding.etOp1.text.toString(),
+                            opcion2=binding.etOp2.text.toString(),
+                            atributo=binding.spAtributo.selectedItem.toString(),
+                            valor=binding.etValor.text.toString().toInt(),
+                            correcta=if (binding.rbOpUno.isChecked) binding.etOp1.text.toString() else binding.etOp2.text.toString()
+                        )
+                        viewModel.registrarPrueba(prueba,pe)
+                        limpiar()
+
                     }
                 }
                 Parametros.afinidad -> {
@@ -246,7 +276,15 @@ class FragCrearPrueba : Fragment() {
                         Toast.makeText(requireContext(), R.string.errRellenaCampos, Toast.LENGTH_SHORT).show()
                     } else {
                         // Proceder con la inserción de la prueba
+
+                        var afinidad= PreguntaAfinidad(
+                            idPrueba=0,
+                            pregunta=binding.etPregunta.text.toString(),
+                            atributo=binding.spAtributo.selectedItem.toString()
+                        )
+                        viewModel.registrarPrueba(prueba,afinidad)
                         Log.d("Manuel", "Campos completos para afinidad")
+                        limpiar()
                     }
                 }
                 Parametros.pp -> {
@@ -259,7 +297,15 @@ class FragCrearPrueba : Fragment() {
                         Toast.makeText(requireContext(), R.string.errRellenaCampos, Toast.LENGTH_SHORT).show()
                     } else {
                         // Proceder con la inserción de la prueba
+                        var pp= PruebaPuntales(
+                            idPrueba=0,
+                            descripcion=binding.etDescripcion.text.toString(),
+                            atributo=binding.spAtributo.selectedItem.toString(),
+                            dificultad = binding.etPorcenAciertosDificultad.text.toString().toInt()
+                        )
+                        viewModel.registrarPrueba(prueba,pp)
                         Log.d("Manuel", "Campos completos para pp")
+                        limpiar()
                     }
                 }
                 Parametros.resL -> {
@@ -272,6 +318,14 @@ class FragCrearPrueba : Fragment() {
                         Toast.makeText(requireContext(), R.string.errRellenaCampos, Toast.LENGTH_SHORT).show()
                     } else {
                         // Proceder con la inserción de la prueba
+                        var resL= PreguntaRl(
+                            idPrueba=0,
+                            pregunta=binding.etPregunta.text.toString(),
+                            palabrasClave=binding.etPalabrasClave.text.toString(),
+                            porcenAciertos = binding.etPorcenAciertosDificultad.text.toString().toInt()
+                        )
+                        viewModel.registrarPrueba(prueba,resL)
+                        limpiar()
                         Log.d("Manuel", "Campos completos para resL")
                     }
                 }

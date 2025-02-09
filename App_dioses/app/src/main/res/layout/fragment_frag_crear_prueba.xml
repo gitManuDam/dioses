@@ -400,14 +400,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:text="Uno" />
+            android:text="@string/uno" />
 
         <RadioButton
             android:id="@+id/rbOpDos"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
-            android:text="Dos" />
+            android:text="@string/dos" />
     </RadioGroup>
 
 
