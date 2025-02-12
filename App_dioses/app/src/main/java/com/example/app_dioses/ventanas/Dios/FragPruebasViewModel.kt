@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import android.util.Log
 import com.example.app_dioses.api.PruebasNetwork
 import com.example.app_dioses.modelo.Prueba
+import com.example.app_dioses.modelo.PruebaHumanoRV
+import com.example.app_dioses.parametros.Parametros
 import kotlinx.coroutines.launch
 
 class FragPruebasViewModel : ViewModel() {
@@ -16,6 +18,54 @@ class FragPruebasViewModel : ViewModel() {
     fun restablecerError() {
         Log.d("Manuel", "restablecerError: Restableciendo código de error")
         _errorCode.value = null
+    }
+
+    private val _pruebaDetalle= MutableLiveData<Any?>()
+    val pruebaDetalle: MutableLiveData<Any?> = _pruebaDetalle
+
+    fun restPruebaDetalle(){
+        _pruebaDetalle.value = null
+    }
+
+    fun obtenerPruebaDetalle(pruebaRV: Prueba) {
+        Log.e("Manuel", "obtenerPruebaDetalle: FragPruebasViewModel ~${pruebaRV.id}")
+        when(pruebaRV.tipo){
+            Parametros.pp->{
+                viewModelScope.launch {
+                    val response = PruebasNetwork.retrofit.obtenerPruebaPuntual(pruebaRV.id)
+                    Log.d("Manuel", "obtenerPruebaDetalle: FragPruebasViewModel ~${response.body()}")
+                    _pruebaDetalle.value = response.body()
+                }
+            }
+            Parametros.resL->{
+                viewModelScope.launch {
+                    val response = PruebasNetwork.retrofit.obtenerPreguntaRl(pruebaRV.id)
+                    Log.d("Manuel", "obtenerPruebaDetalle: FragPruebasViewModel ~${response.body()}")
+                    _pruebaDetalle.value = response.body()
+                }
+
+
+            }
+
+            Parametros.eleccion->{
+                viewModelScope.launch {
+                    val response = PruebasNetwork.retrofit.obtenerPreguntaEleccion(pruebaRV.id)
+                    Log.d("Manuel", "obtenerPruebaDetalle: FragPruebasViewModel ~${response.body()}")
+                    _pruebaDetalle.value = response.body()
+                }
+
+            }
+
+            Parametros.afinidad->{
+                viewModelScope.launch {
+                    val response = PruebasNetwork.retrofit.obtenerPreguntaAfinidad(pruebaRV.id)
+                    Log.d("Manuel", "obtenerPruebaDetalle: FragPruebasViewModel ~${response.body()}")
+                    _pruebaDetalle.value = response.body()
+                }
+
+            }
+
+        }
     }
 
     private val _pruebas = MutableLiveData<List<Prueba>>()

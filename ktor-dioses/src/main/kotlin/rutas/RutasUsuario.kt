@@ -85,6 +85,22 @@ fun Route.rutasUsuario() {
         get {
             call.respond(HttpStatusCode.OK, usuarioDAO.obtenerTodosLosHumanos())
         }
+        put("/actualizar"){
+            try{
+                val humano = call.receive<Humano>()
+
+                if(usuarioDAO.actualizarHumano(humano)){
+                    call.respond(HttpStatusCode.OK,true)
+                }else{
+                    call.respond(HttpStatusCode.NotModified,false)
+                }
+            }catch (e: Exception){
+                call.respond(HttpStatusCode.BadRequest,false)
+                println(e.message)
+            }
+
+
+        }
 
 
     }

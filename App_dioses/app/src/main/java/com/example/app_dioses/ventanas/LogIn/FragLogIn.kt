@@ -15,6 +15,7 @@ import com.example.app_dioses.R
 import com.example.app_dioses.databinding.FragmentFragLogInBinding
 import com.example.app_dioses.modelo.UsuarioLogIn
 import com.example.app_dioses.ventanas.Dios.DiosActivity
+import com.example.app_dioses.ventanas.Humano.HumanoActivity
 
 class FragLogIn : Fragment() {
     private var _binding: FragmentFragLogInBinding? = null
@@ -64,6 +65,10 @@ class FragLogIn : Fragment() {
         }
         mainViewModel.humanoLogeado.observe(viewLifecycleOwner){
             if (it!=null){
+                val intent = Intent(requireContext(), HumanoActivity::class.java)
+                intent.putExtra("Usuario", it)
+                Log.e("Manuel", "onCreateView: $it")
+                startActivity(intent)
                 Toast.makeText(requireContext(), getString(R.string.msjSesionIniciada), Toast.LENGTH_SHORT).show()
                 limpiarCampos()
             }

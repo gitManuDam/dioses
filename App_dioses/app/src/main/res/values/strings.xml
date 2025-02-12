@@ -65,4 +65,21 @@
     <string name="textEligeUnHumano">Elige un humano</string>
     <string name="AsignarAfin">Asignar al mas Afin</string>
     <string name="AsignarTodos">Asignar a todos</string>
+    <string name="tituloPruebasPendientes">Pruebas Pendientes</string>
+    <string name="tituloHistoricoPruebas">Historico</string>
+    <string name="tituloEleccion">Pregunta de Eleccion</string>
+    <string name="tituloPuntual">Prueba Puntual</string>
+    <string name="tituloRespuestaLibre">Pregunta Respuesta Libre</string>
+    <string name="tituloValoracion">Prueba de Afinidad</string>
+    <string name="sin_PruebasPendients">No tienes pruebas pendientes</string>
+    <string name="Relizar">Realizar</string>
+    <string name="tipo">Tipo</string>
+    <string name="destino">Destino</string>
+    <string name="destino_final">Destino Final</string>
+    <string name="estado">Estado</string>
+    <string name="empezar">Empezar</string>
+    <string name="Resultado">Resultado</string>
+    <string name="respuesta">Respuesta</string>
+    <string name="IntrRespuesta">Escribe la respuesta</string>
+    <string name="enviar">Enviar respuesta</string>
 </resources>

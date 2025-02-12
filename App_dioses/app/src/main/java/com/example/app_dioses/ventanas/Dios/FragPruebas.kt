@@ -8,13 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.app_dioses.R
 import com.example.app_dioses.adaptadores.AdaptadorPruebas
 import com.example.app_dioses.databinding.FragmentFragPruebasBinding
+import com.example.app_dioses.modelo.PreguntaAfinidad
+import com.example.app_dioses.modelo.PreguntaEleccion
+import com.example.app_dioses.modelo.PreguntaRl
 import com.example.app_dioses.modelo.Prueba
+import com.example.app_dioses.modelo.PruebaPuntales
 import com.example.app_dioses.ventanas.LogIn.MainViewModel
 
 class FragPruebas : Fragment() {
@@ -62,6 +67,30 @@ class FragPruebas : Fragment() {
                 binding.tvSinPruebas.visibility = View.GONE
             }
         }
+        viewModel.pruebaDetalle.observe(viewLifecycleOwner) { pruebaDetalle ->
+            when (pruebaDetalle) {
+                is PruebaPuntales ->{
+                    mostrarDialogoPruebaPuntales(pruebaDetalle)
+                    viewModel.restPruebaDetalle()
+
+                }
+                is PreguntaRl ->{
+                    mostrarDialogoPreguntaRl(pruebaDetalle)
+                    viewModel.restPruebaDetalle()
+
+                }
+                is PreguntaEleccion ->{
+                    mostrarDialogoPreguntaEleccion(pruebaDetalle)
+                    viewModel.restPruebaDetalle()
+
+                }
+                is PreguntaAfinidad ->{
+                    mostrarDialogoPreguntaAfinidad(pruebaDetalle)
+                    viewModel.restPruebaDetalle()
+
+                }
+            }
+        }
 
         return root
     }
@@ -94,5 +123,63 @@ class FragPruebas : Fragment() {
         binding.recyViewPruebas.layoutManager = linearLayoutManager
         adaptador = AdaptadorPruebas(datos, viewModel, mainViewModel, requireContext())
         binding.recyViewPruebas.adapter = adaptador
+    }
+
+    private fun mostrarDialogoPreguntaRl(preguntaRl: PreguntaRl) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Detalles de la Pregunta RL")
+            .setMessage(
+
+                "Pregunta: ${preguntaRl.pregunta}\n" +
+                "Porcentaje de Aciertos: ${preguntaRl.porcenAciertos}%\n"+
+                "Palabras Clave: ${preguntaRl.palabrasClave}"
+
+
+
+
+            )
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
+    }
+    private fun mostrarDialogoPreguntaAfinidad(preguntaAfinidad: PreguntaAfinidad) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Detalles de la Pregunta de Afinidad")
+            .setMessage(
+
+                "Pregunta: ${preguntaAfinidad.pregunta}\n"+
+                "Atributo: ${preguntaAfinidad.atributo}"
+
+
+            )
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
+    }
+    private fun mostrarDialogoPreguntaEleccion(preguntaEleccion: PreguntaEleccion) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Detalles de la Pregunta de Elección")
+            .setMessage(
+
+                "Pregunta: ${preguntaEleccion.pregunta}\n" +
+                        "Opción 1: ${preguntaEleccion.opcion1}\n" +
+                        "Opción 2: ${preguntaEleccion.opcion2}\n"+
+                        "Respuesta Correcta: ${preguntaEleccion.correcta}\n"+
+                        "Atributo: ${preguntaEleccion.atributo} -> ${preguntaEleccion.valor}\n"
+
+
+            )
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
+    }
+    private fun mostrarDialogoPruebaPuntales(pruebaPuntales: PruebaPuntales) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Detalles de la Prueba de Puntuales")
+            .setMessage(
+                "Descripción: ${pruebaPuntales.descripcion}\n"+
+                "Dificultad: ${pruebaPuntales.dificultad}\n"+
+                "Atributo: ${pruebaPuntales.atributo}"
+
+            )
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 }
