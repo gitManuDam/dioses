@@ -26,6 +26,7 @@ class FragCrearPruebaViewModel : ViewModel() {
                     if (response.isSuccessful){
                         _errorCode.value=response.code()
                     }else{
+                        PruebasNetwork.retrofit.eliminarPrueba(idPrueba)
                         _errorCode.value=response.code()
                     }
                 }
@@ -39,6 +40,7 @@ class FragCrearPruebaViewModel : ViewModel() {
                     if (response.isSuccessful){
                         _errorCode.value=response.code()
                     }else{
+                        PruebasNetwork.retrofit.eliminarPrueba(idPrueba)
                         _errorCode.value=response.code()
                     }
                 }
@@ -51,6 +53,7 @@ class FragCrearPruebaViewModel : ViewModel() {
                     if (response.isSuccessful){
                         _errorCode.value=response.code()
                     }else{
+                        PruebasNetwork.retrofit.eliminarPrueba(idPrueba)
                         _errorCode.value=response.code()
                     }
                 }
@@ -63,6 +66,7 @@ class FragCrearPruebaViewModel : ViewModel() {
                     if (response.isSuccessful){
                         _errorCode.value=response.code()
                     }else{
+                        PruebasNetwork.retrofit.eliminarPrueba(idPrueba)
                         _errorCode.value=response.code()
                     }
                 }

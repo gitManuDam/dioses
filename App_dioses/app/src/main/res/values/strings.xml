@@ -77,4 +77,9 @@
     <string name="destino">Destino</string>
     <string name="destino_final">Destino Final</string>
     <string name="estado">Estado</string>
+    <string name="empezar">Empezar</string>
+    <string name="Resultado">Resultado</string>
+    <string name="respuesta">Respuesta</string>
+    <string name="IntrRespuesta">Escribe la respuesta</string>
+    <string name="enviar">Enviar respuesta</string>
 </resources>

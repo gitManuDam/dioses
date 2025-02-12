@@ -40,6 +40,38 @@ class UsuarioDAOImp:UsuarioDAO {
     }
 
 
+    override fun actualizarHumano(humano: Humano): Boolean {
+        val sql = """
+        UPDATE humanos SET nombre = ?, correo = ?, clave = ?, destino = ?, estado = ?, foto = ?, 
+        sabiduria = ?, nobleza = ?, virtud = ?, maldad = ?, audacia = ?, idDios = ? 
+        WHERE id = ?
+    """.trimIndent()
+
+        val connection = Database.getConnection()
+        connection?.use {
+            val statement = it.prepareStatement(sql)
+
+            // Asignar valores a la sentencia SQL
+            statement.setString(1, humano.nombre)
+            statement.setString(2, humano.correo)
+            statement.setString(3, humano.clave)
+            statement.setInt(4, humano.destino)
+            statement.setInt(5, humano.estado)
+            statement.setString(6, humano.foto)
+            statement.setInt(7, humano.sabiduria)
+            statement.setInt(8, humano.nobleza)
+            statement.setInt(9, humano.virtud)
+            statement.setInt(10, humano.maldad)
+            statement.setInt(11, humano.audacia)
+            statement.setInt(12, humano.idDios)
+            statement.setInt(13, humano.id) // Condición WHERE id = ?
+
+            // Ejecutar la actualización y devolver si se modificó al menos una fila
+            return statement.executeUpdate() > 0
+        }
+
+        return false
+    }
 
 
 
@@ -261,5 +293,34 @@ class UsuarioDAOImp:UsuarioDAO {
         }
         return null
     }
+
+    override fun actualizarDios(dios: Dios): Boolean {
+        val sql = """
+        UPDATE dioses SET nombre = ?, clave = ?, sabiduria = ?, nobleza = ?, virtud = ?, 
+        maldad = ?, audacia = ?, foto = ? WHERE id = ?
+    """.trimIndent()
+
+        val connection = Database.getConnection()
+        connection?.use {
+            val statement = it.prepareStatement(sql)
+
+            // Asignar valores a la sentencia SQL
+            statement.setString(1, dios.nombre)
+            statement.setString(2, dios.clave)
+            statement.setInt(3, dios.sabiduria)
+            statement.setInt(4, dios.nobleza)
+            statement.setInt(5, dios.virtud)
+            statement.setInt(6, dios.maldad)
+            statement.setInt(7, dios.audacia)
+            statement.setString(8, dios.foto)
+            statement.setInt(9, dios.id) // Condición WHERE id = ?
+
+            // Ejecutar la actualización y devolver si se modificó al menos una fila
+            return statement.executeUpdate() > 0
+        }
+
+        return false
+    }
+
 }
 

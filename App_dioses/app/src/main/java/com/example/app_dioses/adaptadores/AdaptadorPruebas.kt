@@ -3,6 +3,7 @@ package com.example.app_dioses.adaptadores
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,6 +76,11 @@ class AdaptadorPruebas(var pruebas: ArrayList<Prueba>,var viewModel: FragPruebas
                     .show()
 
 
+            }
+
+            itemView.setOnClickListener {
+                viewModel.obtenerPruebaDetalle(item)
+                Log.d("Manuel", "Adaptador prueba pendientes.bind: $item")
             }
 
 

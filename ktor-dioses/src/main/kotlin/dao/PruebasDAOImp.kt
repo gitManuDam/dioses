@@ -231,7 +231,7 @@ class PruebasDAOImp: PruebasDAO {
                     idPrueba = resultSet.getInt("idPrueba"),
                     pregunta = resultSet.getString("pregunta"),
                     palabrasClave = resultSet.getString("palabrasClave"),
-                    porcenAciertos = resultSet.getInt("porceAciertos"),
+                    porcenAciertos = resultSet.getInt("porcenAciertos"),
 
                 )
                 return prueba

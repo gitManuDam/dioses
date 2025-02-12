@@ -3,6 +3,7 @@ package com.example.app_dioses.adaptadores
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.example.app_dioses.R
 import com.example.app_dioses.adaptadores.AdaptadorPruebas.ViewHolder
 import com.example.app_dioses.modelo.Prueba
 import com.example.app_dioses.modelo.PruebaHumanoRV
+import com.example.app_dioses.parametros.Parametros
 import com.example.app_dioses.ventanas.Dios.FragPruebasViewModel
 import com.example.app_dioses.ventanas.Humano.FragPruebasPendientesViewModel
 import com.example.app_dioses.ventanas.LogIn.MainViewModel
@@ -66,8 +68,30 @@ RecyclerView.Adapter<AdaptadorPruebaPendientes.ViewHolder>() {
             }
 
             btnRealizar.setOnClickListener {
-                //val bundle = bundleOf("Prueba" to item)
-                //Navigation.findNavController(it).navigate(R.id.nav_fragAsignarPrueba, bundle)
+                when(item.tipo){
+                    Parametros.pp->{
+                        val bundle = bundleOf("Prueba" to item)
+                        Navigation.findNavController(itemView).navigate(R.id.nav_fragPuntual,bundle)
+
+                    }
+                    Parametros.resL->{
+                        val bundle = bundleOf("Prueba" to item)
+                        Navigation.findNavController(itemView).navigate(R.id.nav_fragRespuestaLibre,bundle)
+                    }
+                    Parametros.eleccion->{
+                        val bundle = bundleOf("Prueba" to item)
+                        Navigation.findNavController(itemView).navigate(R.id.nav_fragEleccion,bundle)
+                    }
+                    Parametros.afinidad->{
+                        val bundle = bundleOf("Prueba" to item)
+                        Navigation.findNavController(itemView).navigate(R.id.nav_fragValoracion,bundle)
+                    }
+                }
+            }
+
+            itemView.setOnClickListener {
+                viewModel.obtenerPruebaDetalle(item)
+                Log.d("Manuel", "Adaptador prueba pendientes.bind: $item")
             }
 
 

@@ -39,6 +39,8 @@ interface UsuarioAPI {
 
     @GET("humanos/filtrarHumanosPorNombre/{nombre}")
     suspend fun filtrarHumanosPorNombre(@Path("nombre") nombre: String): Response<MutableList<Humano>>
+    @PUT("humanos/actualizar")
+    suspend fun actualizarHumano(@Body humano: Humano): Response<Boolean>
 
 
     // Rutas para Dioses
