@@ -8,14 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.app_dioses.R
 import com.example.app_dioses.databinding.FragmentFragPruebasPendientesBinding
 import com.example.app_dioses.databinding.FragmentFragPuntualBinding
+import com.example.app_dioses.modelo.Actualizacion
 import com.example.app_dioses.modelo.Humano
 import com.example.app_dioses.modelo.Prueba
 import com.example.app_dioses.modelo.PruebaHumanoRV
 import com.example.app_dioses.ventanas.LogIn.MainViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class FragPuntual : Fragment() {
     private var _binding: FragmentFragPuntualBinding? = null
@@ -41,12 +44,6 @@ class FragPuntual : Fragment() {
         _binding = FragmentFragPuntualBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
-
-        binding.btnEmepzar.setOnClickListener {
-
-        }
-
         return root
     }
 
@@ -66,9 +63,19 @@ class FragPuntual : Fragment() {
             binding.tvTituloPrueba.text = prueba.titulo
 
         }
+        binding.btnEmepzar.setOnClickListener {
+            lifecycleScope.launch {
+                realizarPrueba(prueba)
+            }
+            binding.btnEmepzar.visibility = View.GONE
+        }
+
+
+
     }
 
-    suspend fun realizarPrueba(humano: Humano, prueba: PruebaHumanoRV){
+    suspend fun realizarPrueba( prueba: PruebaHumanoRV){
+        val humano: Humano = mainViewModel.humanoLogeado.value!!
         val atributoHumano = when (viewModel.pruebaPuntual.value!!.atributo) {
             "sabiduria" -> humano.sabiduria
             "nobleza" -> humano.nobleza
@@ -86,14 +93,23 @@ class FragPuntual : Fragment() {
         val resultado = (1..100).random()
 
         val exito = resultado <= probabilidadExito
+        val act = Actualizacion(
+            estado = if (exito) 1 else 2,
+            idPruebaHumano = prueba.id,
+            destinoFin = if (exito) prueba.destino else -prueba.destino
+        )
+        viewModel.actualizarPruebaPuntual(act)
 
         // Modificamos el destino según el resultado de la prueba
-        humano.destino += if (exito) prueba.destino else -prueba.destino
+        mainViewModel.humanoLogeado.value!!.destino += if (exito) prueba.destino else -prueba.destino
+        viewModel.actualizarDestinoHumano(mainViewModel.humanoLogeado.value!!)
         delay(22)
-        println("${humano.nombre} intenta superar la prueba '${prueba.titulo}" +
-                "' con un atributo de $atributoHumano y dificultad ${viewModel.pruebaPuntual.value!!.dificultad}%.")
-        println("Probabilidad de éxito calculada: $probabilidadExito%. Resultado: ${if (exito) "Éxito ✅" else "Fracaso ❌"}")
-        println("Destino final de ${humano.nombre}: ${humano.destino}")
+        binding.tvRegistroPrueba.append("${humano.nombre} intenta superar la prueba '${prueba.titulo}" )
+         delay(2000)
+
+        binding.tvRegistroPrueba.append("\nProbabilidad de éxito calculada: $probabilidadExito%. Resultado: ${if (exito) "Éxito ✅" else "Fracaso ❌"}")
+        delay(2000)
+        binding.tvRegistroPrueba.append("\nDestino final de ${humano.nombre}: ${humano.destino}")
     }
 
 
