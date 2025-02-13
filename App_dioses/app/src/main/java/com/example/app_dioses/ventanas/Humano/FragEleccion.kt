@@ -21,8 +21,8 @@ class FragEleccion : Fragment() {
     private val viewModel: FragEleccionViewModel by viewModels()
     private var _binding: FragmentFragEleccionBinding? = null
     private val binding get() = _binding!!
-
     private val mainViewModel: MainViewModel by activityViewModels()
+
     companion object {
         fun newInstance() = FragEleccion()
     }
@@ -59,11 +59,17 @@ class FragEleccion : Fragment() {
 
         }
         binding.btnOp1.setOnClickListener {
-            realizarPrueba(prueba,binding.btnOp1.text.toString())
+            if(viewModel.isPruebaAct.value == false){
+                realizarPrueba(prueba,binding.btnOp1.text.toString())
+            }
+
+
 
         }
         binding.btnOp2.setOnClickListener {
-            realizarPrueba(prueba, binding.btnOp2.text.toString())
+            if(viewModel.isPruebaAct.value == false){
+                realizarPrueba(prueba,binding.btnOp2.text.toString())
+            }
         }
 
 

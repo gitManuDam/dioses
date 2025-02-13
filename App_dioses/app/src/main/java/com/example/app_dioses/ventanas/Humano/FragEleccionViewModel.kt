@@ -16,7 +16,7 @@ class FragEleccionViewModel : ViewModel() {
     private val _preguntaEleccion = MutableLiveData<PreguntaEleccion>()
     val preguntaEleccion: MutableLiveData<PreguntaEleccion> = _preguntaEleccion
 
-    private val _isPruebaAct = MutableLiveData<Boolean>()
+    private val _isPruebaAct = MutableLiveData<Boolean>(false)
     val isPruebaAct: MutableLiveData<Boolean> = _isPruebaAct
 
     fun obtenerPrueba(idPrueba: Int) {
