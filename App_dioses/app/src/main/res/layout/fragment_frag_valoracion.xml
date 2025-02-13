@@ -8,20 +8,19 @@
     tools:context=".ventanas.Humano.FragValoracion">
 
     <Button
-        android:id="@+id/btnEnviar2"
+        android:id="@+id/btnEnviar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enviar"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.636"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.922" />
+        app:layout_constraintVertical_bias="0.92" />
 
     <TextView
-        android:id="@+id/tvTituloPrueba4"
+        android:id="@+id/tvResultado"
         android:layout_width="300dp"
         android:layout_height="48dp"
 
@@ -81,7 +80,7 @@
         app:layout_constraintVertical_bias="0.324" />
 
     <SeekBar
-        android:id="@+id/sbNumObjetivosAltaMi"
+        android:id="@+id/sbRespuesta"
         android:layout_width="256dp"
         android:layout_height="25dp"
         android:max="5"

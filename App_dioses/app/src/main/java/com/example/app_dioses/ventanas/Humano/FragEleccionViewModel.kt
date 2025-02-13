@@ -1,7 +1,57 @@
 package com.example.app_dioses.ventanas.Humano
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.app_dioses.api.PruebasNetwork
+import com.example.app_dioses.api.UsuarioNetwork
+import com.example.app_dioses.modelo.Actualizacion
+import com.example.app_dioses.modelo.Humano
+import com.example.app_dioses.modelo.PreguntaEleccion
+import com.example.app_dioses.modelo.PreguntaRl
+import kotlinx.coroutines.launch
 
 class FragEleccionViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+    private val _preguntaEleccion = MutableLiveData<PreguntaEleccion>()
+    val preguntaEleccion: MutableLiveData<PreguntaEleccion> = _preguntaEleccion
+
+    private val _isPruebaAct = MutableLiveData<Boolean>(false)
+    val isPruebaAct: MutableLiveData<Boolean> = _isPruebaAct
+
+    fun obtenerPrueba(idPrueba: Int) {
+        viewModelScope.launch {
+
+            val response = PruebasNetwork.retrofit.obtenerPreguntaEleccion(idPrueba)
+            if (response.isSuccessful) {
+                Log.d("Manuel", "FragPuntualViewModel. obtenerPruebaPuntual: ${response.body()}")
+                _preguntaEleccion.value = response.body()
+            }
+
+        }
+    }
+
+    fun actualizarPrueba(act: Actualizacion){
+        viewModelScope.launch {
+            val response = PruebasNetwork.retrofit.actualizarPrueba(act)
+            if (response.isSuccessful){
+                Log.d("Manuel", "FragPuntualViewModel. actualizarPruebaPuntual: ${response.body()}")
+                _isPruebaAct.value = response.body()
+            }
+
+        }
+    }
+
+    fun actualizarDestinoHumano(humano: Humano){
+        viewModelScope.launch {
+            val response = UsuarioNetwork.retrofit.actualizarHumano(humano)
+            if (response.isSuccessful){
+                Log.d("Manuel", "FragPuntualViewModel. actualizarDestinoHumano: ${response.body()}")
+            }else{
+                Log.d("Manuel", "FragPuntualViewModel. actualizarDestinoHumano: ${response.body()}")
+            }
+
+        }
+
+    }
 }

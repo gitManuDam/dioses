@@ -66,7 +66,7 @@
         app:layout_constraintVertical_bias="0.07" />
 
     <TextView
-        android:id="@+id/tvTituloPrueba2"
+        android:id="@+id/tvPregunta"
         android:layout_width="320dp"
         android:layout_height="80dp"
 
@@ -82,7 +82,7 @@
         app:layout_constraintVertical_bias="0.231" />
 
     <TextView
-        android:id="@+id/tvTituloPrueba3"
+        android:id="@+id/tvResultado"
         android:layout_width="300dp"
         android:layout_height="48dp"
 
