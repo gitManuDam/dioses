@@ -161,6 +161,22 @@ fun Route.rutasUsuario() {
             call.respond(HttpStatusCode.OK, dios)
 
         }
+        put("/actualizar"){
+            try{
+                val dios = call.receive<Dios>()
+
+                if(usuarioDAO.actualizarDios(dios)){
+                    call.respond(HttpStatusCode.OK,true)
+                }else{
+                    call.respond(HttpStatusCode.NotModified,false)
+                }
+            }catch (e: Exception){
+                call.respond(HttpStatusCode.BadRequest,false)
+                println(e.message)
+            }
+
+
+        }
 
 
 

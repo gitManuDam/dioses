@@ -84,7 +84,7 @@ class FragProtegidos : Fragment() {
         Log.e("Manuel", "setupRecyclerView: FragProtegidos")
         val linearLayoutManager = LinearLayoutManager(requireContext())
         binding.recyViewProtegidos.layoutManager = linearLayoutManager
-        adaptador = AdaptadorProtegido(datos,  mainViewModel, viewModel)
+        adaptador = AdaptadorProtegido(datos, requireContext(), mainViewModel, viewModel)
         binding.recyViewProtegidos.adapter = adaptador
 
     }

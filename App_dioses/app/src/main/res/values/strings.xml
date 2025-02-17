@@ -82,4 +82,12 @@
     <string name="respuesta">Respuesta</string>
     <string name="IntrRespuesta">Escribe la respuesta</string>
     <string name="enviar">Enviar respuesta</string>
+    <string name="camara">Camara</string>
+    <string name="galeria">Galeria</string>
+    <string name="editar">Editar</string>
+    <string name="sabiduria">Sabiduria</string>
+    <string name="nobleza">Nobleza</string>
+    <string name="virtud">Virtud</string>
+    <string name="audacia">Audacia</string>
+    <string name="maldad">Maldad</string>
 </resources>

@@ -72,11 +72,11 @@ dependencies {
 //    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
 
     //Glide
-//    implementation ("com.github.bumptech.glide:glide:4.14.2")
+    implementation (libs.glide)
 //    implementation ("com.github.bumptech.glide:glide:4.14.2")
 
     //Cloudinary
-//    implementation 'com.cloudinary:cloudinary-android:3.0.2'
+    implementation (libs.cloudinary.android)
 //    implementation 'com.cloudinary:cloudinary-android:3.0.2'
 
 

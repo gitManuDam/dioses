@@ -68,4 +68,7 @@ interface UsuarioAPI {
 
     @GET("dioses/filtrarDiosesPorNombre/{nombre}")
     suspend fun filtrarDiosesPorNombre(@Path("nombre") nombre: String): Response<MutableList<Dios>>
+
+    @PUT("dioses/actualizar")
+    suspend fun actualizarDios(@Body dios: Dios): Response<Boolean>
 }
